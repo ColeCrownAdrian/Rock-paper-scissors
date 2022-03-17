@@ -1,0 +1,111 @@
+# Rock-paper-scissors
+How to make a rock paper scissors game using HTML, JavaScript, and CSS
+<!DOCTYPE html>
+<html>
+<style>
+	button {
+		width: 90px;
+		height: 30px;
+		border-radius: 20px;
+		border: 1px solid white;
+		}
+</style>
+<body>
+<h1>Rock Paper Scissors</h1>
+<h2>Computer: <span id="computer-choice"></span></h2>
+<h2>Player: <span id="player-choice"></span></h2>
+<h3>Result: <span id="result"></span></h3>
+<h3>Score: <span id="computerscore">0</span>:<span id="playerscore">0</span></h3>
+<button id="rock">Rock</button>
+<button id="paper">Paper</button>
+<button id="scissors">Scissors</button>
+<script>
+	const computerChoiceDisplay = document.getElementById('computer-choice')
+	const playerChoiceDisplay = document.getElementById('player-choice')
+	const resultDisplay = document.getElementById('result')
+	const possibleChoices = document.querySelectorAll('button')
+	const computerScore = document.getElementById('computerscore')
+	const playerScore = document.getElementById('playerscore')
+    let playerChoice
+	let computerChoice
+	let result
+	let computerscore = 0;
+	let playerscore = 0;
+	
+	possibleChoices.forEach(possibleChoices => possibleChoices.addEventListener('click', (e) => {
+		playerChoice = e.target.id;
+		playerChoiceDisplay.innerHTML = playerChoice;
+		generateComputerChoice()
+		getResult()
+		getComputerScore()
+		getPlayerScore()
+}));
+
+	function generateComputerChoice() {
+		const randomNumber = Math.floor(Math.random() * 3) + 1;
+		
+		if (randomNumber === 1) {
+			computerChoice = 'rock';
+			}
+			
+		if (randomNumber === 2) {
+			computerChoice = 'paper';
+			}
+			
+		if (randomNumber === 3) {
+			computerChoice = 'scissors';
+			}
+			
+	   computerChoiceDisplay.innerHTML = computerChoice;
+		};
+		
+		function getResult() {
+			if (computerChoice === playerChoice) {
+				result = 'its a draw!';
+				}
+				
+			if (computerChoice === 'rock' && playerChoice === 'paper') {
+				result = 'you win!';
+				}
+				
+			if (computerChoice === 'rock' && playerChoice === 'scissors') {
+				result = 'you lost!';
+				}
+				
+			if (computerChoice === 'paper' && playerChoice === 'rock') {
+				result = 'you lost!';
+				}
+				
+			if (computerChoice === 'paper' && playerChoice === 'scissors') {
+				result = 'you win!';
+				}
+				
+			if (computerChoice === 'scissors' && playerChoice === 'rock') {
+				result = 'you win!';
+				}
+			
+			if (computerChoice === 'scissors' && playerChoice === 'paper') {
+				result = 'you lost!';
+				}
+			
+			 resultDisplay.innerHTML = result;
+				};
+				
+		function getComputerScore() {
+			if (result == 'you lost!') {
+				computerscore = Math.max(computerscore + 1, 0);
+				}
+			
+			computerScore.innerHTML = computerscore;
+			};
+			
+		function getPlayerScore() {
+			if (result == 'you win!') {
+			     playerscore = Math.max(playerscore + 1, 0);
+				}
+			
+			playerScore.innerHTML = playerscore;
+			};
+</script>
+</body>
+</html>
